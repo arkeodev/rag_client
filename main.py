@@ -40,9 +40,12 @@ def main():
 
     with col2:
         if st.button("Clear"):
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
             st.session_state.pdf_file = None
             st.session_state.query = ""
-            st.experimental_rerun()
+            st.cache_data.clear()
+            st.rerun()
 
 
 if __name__ == "__main__":

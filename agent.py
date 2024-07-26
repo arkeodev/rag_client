@@ -21,7 +21,7 @@ def create_agent(model, tools, prompt):
         handle_parsing_errors=True,
         max_iterations=3,
         return_intermediate_steps=True,
-        early_stopping_method="generate",
+        early_stopping_method="force",
     )
     logging.info("ReAct agent created successfully.")
     return agent_executor

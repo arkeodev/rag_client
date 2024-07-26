@@ -10,38 +10,37 @@ from langchain.prompts import PromptTemplate
 def get_custom_prompt():
     """Returns the custom prompt template for the ReAct agent."""
     template = """
-    Answer the following questions as best you can. You have access to the following tools:
+        Answer the following questions as best you can. You have access to the following tools:
 
-    {tools}
+        {tools}
 
-    Use the following format:
+        Use the following format:
 
-    Question: the input question you must answer
-    Thought: you should always think about what to do
-    Action: the action to take, should be one of [{tool_names}]
-    Action Input: the input to the action
-    Observation: the result of the action
+        Question: {input}
+        Thought: Consider what information is needed and how to obtain it.
+        Action: Choose one of the following actions [{tool_names}]
+        Action Input: Provide the necessary input for the chosen action
+        Observation: Record the result of the action
 
-    (If you have used the PDF tool and did not find the relevant information, then you can use other tools)
+        (If the relevant information is not found using the PDF tool, use other available tools.)
 
-    Final Answer: the final answer to the original input question
+        Final Answer: Provide a comprehensive answer to the original question
 
-    Begin!
+        Begin!
 
-    Question: {input}
-    Thought: Let's first check the PDF document to see if it contains the information.
-    Action: RAG doc
-    Action Input: {input}
-    Observation:
+        Question: {input}
+        Thought: Let's first check the PDF document to see if it contains the information.
+        Action: RAG doc
+        Action Input: {input}
+        Observation:
 
-    Thought: If the information was not found in the PDF, let's try other tools.
-    Action: [tool_names]
-    Action Input: {input}
-    Observation:
+        Thought: If the information was not found in the PDF, let's try other tools.
+        Action: [tool_names]
+        Action Input: {input}
+        Observation:
 
-    Thought: I have now gathered all the necessary information.
-    Final Answer:
-    {agent_scratchpad}
+        Thought: I have now gathered all the necessary information.
+        Final Answer: {agent_scratchpad}
     """
     return PromptTemplate(
         input_variables=["input", "tool_names", "tools", "agent_scratchpad"],

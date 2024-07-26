@@ -6,14 +6,12 @@ Main module to set up the environment, load models, tools, create an agent, and 
 
 import logging
 
-from langchain import hub
-
 from agent import create_agent, run_agent
-from config import set_api_keys, setup_logging
 from custom_prompt import get_custom_prompt
 from models import load_models
 from retriever import create_retriever_from_pdf
 from tools import load_tools
+from utils import set_api_keys, setup_logging
 
 
 def process_query(pdf_file, query):
@@ -34,9 +32,8 @@ def process_query(pdf_file, query):
     if pdf_file:
         # Create retriever tool from PDF
         retriever_tool = create_retriever_from_pdf(pdf_file, embedder)
-        tools.insert(0, retriever_tool)  # Prioritize PDF tool
-
-    logging.info(f"Tool List: {tools}")
+        tools.insert(0, retriever_tool)
+        logging.info("PDF file added to the tool list")
 
     # Get the custom prompt template
     prompt = get_custom_prompt()
