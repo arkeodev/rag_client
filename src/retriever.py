@@ -5,13 +5,14 @@ This module handles document retrieval and creation of retriever tools.
 """
 
 import logging
+import os
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.tools.retriever import create_retriever_tool
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 
-from utils import save_uploaded_file
+from src.utils import save_uploaded_file
 
 
 def create_retriever_from_pdf(pdf_file, embedder):
@@ -23,6 +24,7 @@ def create_retriever_from_pdf(pdf_file, embedder):
     loader = PyPDFLoader(file_path=file_path)
     docs = loader.load()
     logging.info("PDF file loaded successfully.")
+    os.remove(file_path)
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = text_splitter.split_documents(docs)

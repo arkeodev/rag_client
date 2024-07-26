@@ -6,7 +6,7 @@ This module sets up the Streamlit application for uploading a PDF and inputting 
 
 import streamlit as st
 
-from app import process_query
+from src.app import process_query
 
 
 def main():

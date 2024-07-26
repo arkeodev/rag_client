@@ -6,12 +6,12 @@ Main module to set up the environment, load models, tools, create an agent, and 
 
 import logging
 
-from agent import create_agent, run_agent
-from custom_prompt import get_custom_prompt
-from models import load_models
-from retriever import create_retriever_from_pdf
-from tools import load_tools
-from utils import set_api_keys, setup_logging
+from src.agent import create_agent, run_agent
+from src.custom_prompt import get_custom_prompt
+from src.models import load_models
+from src.retriever import create_retriever_from_pdf
+from src.tools import load_tools
+from src.utils import set_api_keys, setup_logging
 
 
 def process_query(pdf_file, query):
